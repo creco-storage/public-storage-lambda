@@ -7,17 +7,18 @@
 ### Origin Response
 ```
 const DYNAMIC_CODE_URL = `https://raw.githubusercontent.com/creco-storage/public-storage-lambda/main/www.creco.services/origin-response.js`;
+const { get } = require("node:https");
+const resolver = (rr) => {
+  return (r, d = "") => {
+    return [r.on("data", (c) => (d += c)), r.on("end", () => rr(d))];
+  };
+};
 
 exports.handler = async (event, context, callback) => {
   const req = event.Records[0].cf.request;
   const res = event.Records[0].cf.response;
 
-  const code = await new Promise(resolve => {
-    return require('node:https').get(
-      DYNAMIC_CODE_URL, 
-      (res, data = '') => res.on('data', (c) => data += c) && res.on('end', () => resolve(data))
-    );
-  });
+  const code = await new Promise((r) => get(DYNAMIC_CODE_URL, resolver(r)));
   
   const response = await new Function("eval_request","eval_response", code).call(this, req, res);
 
@@ -29,20 +30,21 @@ exports.handler = async (event, context, callback) => {
 ```
 const path = require("path");
 
-const DYNAMIC_CODE_URL = `https://raw.githubusercontent.com/creco-storage/public-storage-lambda/main/www.creco.services/origin-request.js?v=2`;
+const DYNAMIC_CODE_URL = `https://raw.githubusercontent.com/creco-storage/public-storage-lambda/main/www.creco.services/origin-request.js`;
+const { get } = require("node:https");
+const resolver = (rr) => {
+  return (r, d = "") => {
+    return [r.on("data", (c) => (d += c)), r.on("end", () => rr(d))];
+  };
+};
+
 
 exports.handler = async (event, context, callback) => {
   const req = event.Records[0].cf.request;
   const res = event.Records[0].cf.response;
   const packages = { path };
 
-  const code = await new Promise((resolve) => {
-    return require("node:https").get(
-      DYNAMIC_CODE_URL,
-      (res, data = "") =>
-        res.on("data", (c) => (data += c)) && res.on("end", () => resolve(data))
-    );
-  });
+  const code = await new Promise((r) => get(DYNAMIC_CODE_URL, resolver(r)));
 
   const response = await new Function(
     "eval_request",
@@ -53,4 +55,5 @@ exports.handler = async (event, context, callback) => {
 
   callback(null, response);
 };
+
 ```
