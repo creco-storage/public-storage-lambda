@@ -1,4 +1,5 @@
 const DYNAMIC_CODE_URL = `https://raw.githubusercontent.com/creco-storage/public-storage-lambda/main/index.js`;
+
 const ContentType = {
   ["html"]: "text/html; charset=UTF-8",
   ["js"]: "text/javascript; charset=UTF-8",
@@ -18,8 +19,6 @@ const RemoveHeaderList = [
   "content-security-policy",
   "strict-transport-security",
 ];
-
-
 
 async function main(request, response) {
   try {
