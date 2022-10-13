@@ -24,13 +24,11 @@ async function main(request, response, { path }) {
       ],
     },
   };
+  
+  return redirect;
 }
 
 // const path = require('path');
 // const resopnse = await new Function("eval_request", "eval_response", "eval_packages", functionStr)
 //                  .call(this, req, res, { path });
-const value = main(eval_request, eval_response, eval_packages);
-
-console.log(value);
-
-return value;
+return main(eval_request, eval_response, eval_packages);
