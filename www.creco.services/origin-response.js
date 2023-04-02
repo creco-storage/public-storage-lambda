@@ -41,6 +41,13 @@ async function main(request, response) {
         },
       ];
     }
+    
+    headers["cache-control"] = [
+      {
+        key: "Cache-Control",
+        value: "max-age=60,s-maxage=31536000"
+      }
+    ];  
 
     for (const name of RemoveHeaderList) {
       delete headers[name];
