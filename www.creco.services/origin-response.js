@@ -45,7 +45,8 @@ async function main(request, response) {
     headers["cache-control"] = [
       {
         key: "Cache-Control",
-        value: "max-age=60,s-maxage=31536000"
+//         value: "max-age=60,s-maxage=31536000"
+        value: "max-age=0,s-maxage=0"
       }
     ];  
 
