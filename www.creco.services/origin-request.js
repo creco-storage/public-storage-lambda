@@ -6,7 +6,7 @@ async function main(request, response, { path }) {
   const extension = path.extname(url);
 
   if (extension && extension.length > 0) {
-    if (extension[0] === 'txt') {
+    if (extension === 'txt') {
       const value = url.replace('.txt', '') + "/index.txt";
       console.log("redirect to " + value);
       
