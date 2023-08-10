@@ -1,11 +1,15 @@
 async function main(request, response, { path }) {
   const url = request.uri;
+  console.log('v1');
   console.log({ url });
 
   const extension = path.extname(url);
 
   if (extension && extension.length > 0) {
     if (extension[0] === 'txt') {
+      const value = url.replace('.txt', '') + "/index.txt";
+      console.log("redirect to " + value);
+      
       const redirect = {
         status: "302",
         statusDescription: "Found",
@@ -13,12 +17,11 @@ async function main(request, response, { path }) {
           location: [
             {
               key: "Location",
-              value: `${url.replace('.txt', '')}/index.txt`,
+              value,
             },
           ],
         },
       };
-      console.log(`redirect to ${redirect.headers.location[0].value}`);
       
       return redirect;
     }
@@ -28,10 +31,11 @@ async function main(request, response, { path }) {
 
   if (url.endsWith("/")) {
     request.uri = url + "index.html";
-    console.log(`serving to ${request.uri}`);
+    console.log("serving to " + request.uri);
     return request;
   }
 
+  const value = url + "/";
   const redirect = {
     status: "302",
     statusDescription: "Found",
@@ -39,12 +43,12 @@ async function main(request, response, { path }) {
       location: [
         {
           key: "Location",
-          value: `${url}/?${queryString}`,
+          value,
         },
       ],
     },
   };
-  console.log(`redirect to ${redirect.headers.location[0].value}`);
+  console.log("redirect to " + value);
 
   return redirect;
 }
