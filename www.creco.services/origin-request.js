@@ -12,23 +12,10 @@ async function main(request, response, { path }) {
     if (url.endsWith('index.txt')) {
       return request;
     } else if (extension === '.txt') {
-      const value = url.replace('.txt', '') + "/index.txt" + "?" + querystring;
-      console.log("redirect to " + value);
-      
-      const redirect = {
-        status: "302",
-        statusDescription: "Found",
-        headers: {
-          location: [
-            {
-              key: "Location",
-              value,
-            },
-          ],
-        },
-      };
-      
-      return redirect;
+      const value = url.replace('.txt', '') + "/index.txt";
+      request.uri = value;
+
+      return request;
     }
 
     return request;
@@ -38,22 +25,11 @@ async function main(request, response, { path }) {
     request.uri = url + "index.html";
     console.log("serving to " + request.uri);
     return request;
+  } else {
+    request.uri = url + "/index.html";
+    console.log("serving to " + request.uri);
+    return request;
   }
-
-  const value = url + "/" + "?" + querystring;
-  const redirect = {
-    status: "302",
-    statusDescription: "Found",
-    headers: {
-      location: [
-        {
-          key: "Location",
-          value,
-        },
-      ],
-    },
-  };
-  console.log("redirect to " + value);
 
   return redirect;
 }
