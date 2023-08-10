@@ -1,5 +1,5 @@
 async function main(request, response, { path }) {
-  const url = request.uri;
+  const [url, queryString] = request.uri?.split('?');
 
   const extension = path.extname(url);
 
@@ -8,7 +8,7 @@ async function main(request, response, { path }) {
   }
 
   if (url.endsWith("/")) {
-    request.uri = url + "index.html";
+    request.uri = url + "index.html" + "?" + queryString;
     return request;
   }
 
@@ -19,7 +19,7 @@ async function main(request, response, { path }) {
       location: [
         {
           key: "Location",
-          value: `${url}/`,
+          value: `${url}/?${queryString}`,
         },
       ],
     },
