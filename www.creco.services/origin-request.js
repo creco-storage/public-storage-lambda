@@ -1,5 +1,6 @@
 async function main(request, response, { path }) {
   const url = request.uri;
+  console.log({ url });
 
   const extension = path.extname(url);
 
