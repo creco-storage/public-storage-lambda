@@ -39,24 +39,28 @@ async function main(request, response, { path }) {
     request.uri = url + "index.html";
     console.log("serving to " + request.uri);
     return request;
+  } else {
+    request.uri = url + "/index.html";
+    console.log("serving to " + request.uri);
+    return request;
   }
 
-  const value = url + "/" + "?" + querystring;
-  const redirect = {
-    status: "302",
-    statusDescription: "Found",
-    headers: {
-      location: [
-        {
-          key: "Location",
-          value,
-        },
-      ],
-    },
-  };
-  console.log("redirect to " + value);
+  // const value = url + "/" + "?" + querystring;
+  // const redirect = {
+  //   status: "302",
+  //   statusDescription: "Found",
+  //   headers: {
+  //     location: [
+  //       {
+  //         key: "Location",
+  //         value,
+  //       },
+  //     ],
+  //   },
+  // };
+  // console.log("redirect to " + value);
 
-  return redirect;
+  // return redirect;
 }
 
 // const path = require('path');
