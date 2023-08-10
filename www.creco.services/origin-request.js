@@ -1,10 +1,7 @@
 async function main(request, response, { path }) {
-  const [url, queryString] = request.uri?.split('?');
-
-  console.log({ url, queryString });
+  const url = request.uri;
 
   const extension = path.extname(url);
-  console.log({ extension });
 
   if (extension && extension.length > 0) {
     if (extension[0] === 'txt') {
@@ -15,12 +12,12 @@ async function main(request, response, { path }) {
           location: [
             {
               key: "Location",
-              value: `${url.replace('.txt', '')}/index.txt?${queryString}`,
+              value: `${url.replace('.txt', '')}/index.txt`,
             },
           ],
         },
       };
-      console.log(`redirect to ${`${url.replace('.txt', '')}/index.txt?${queryString}`}`);
+      console.log(`redirect to ${redirect.headers.location[0].value}`);
       
       return redirect;
     }
@@ -29,7 +26,7 @@ async function main(request, response, { path }) {
   }
 
   if (url.endsWith("/")) {
-    request.uri = url + "index.html" + "?" + queryString;
+    request.uri = url + "index.html";
     console.log(`serving to ${request.uri}`);
     return request;
   }
@@ -46,8 +43,8 @@ async function main(request, response, { path }) {
       ],
     },
   };
-  console.log(`redirect to ${`${url}/?${queryString}`}`);
-  
+  console.log(`redirect to ${redirect.headers.location[0].value}`);
+
   return redirect;
 }
 
