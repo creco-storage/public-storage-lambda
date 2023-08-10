@@ -42,7 +42,7 @@ async function main(request, response) {
       ];
     }
 
-    if (type === 'js' && uri.includes('_next/static')) {
+    if ((type === 'js' || type === 'css') && uri.includes('_next/static')) {
       headers["cache-control"] = [
         {
           key: "Cache-Control",
