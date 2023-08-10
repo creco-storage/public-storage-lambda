@@ -1,7 +1,9 @@
 async function main(request, response, { path }) {
   const url = request.uri;
-  console.log('v3');
+  const querystring = request.querystring;
+  console.log('v4');
   console.log({ url });
+  console.log({ querystring });
 
   const extension = path.extname(url);
   console.log('extension ' + extension);
