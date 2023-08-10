@@ -1,9 +1,10 @@
 async function main(request, response, { path }) {
   const url = request.uri;
   const querystring = request.querystring;
-  console.log('v4');
+  console.log('v5');
   console.log({ url });
   console.log({ querystring });
+  console.log({ request });
 
   const extension = path.extname(url);
   console.log('extension ' + extension);
@@ -12,7 +13,7 @@ async function main(request, response, { path }) {
     if (url.endsWith('index.txt')) {
       return request;
     } else if (extension === '.txt') {
-      const value = url.replace('.txt', '') + "/index.txt";
+      const value = url.replace('.txt', '') + "/index.txt" + "?" + querystring;
       console.log("redirect to " + value);
       
       const redirect = {
@@ -40,7 +41,7 @@ async function main(request, response, { path }) {
     return request;
   }
 
-  const value = url + "/";
+  const value = url + "/" + "?" + querystring;
   const redirect = {
     status: "302",
     statusDescription: "Found",
