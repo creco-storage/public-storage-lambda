@@ -41,14 +41,24 @@ async function main(request, response) {
         },
       ];
     }
-    
-    headers["cache-control"] = [
-      {
-        key: "Cache-Control",
-//         value: "max-age=60,s-maxage=31536000"
-        value: "no-cache"
-      }
-    ];  
+
+    if (type === 'js') {
+      console.log("js " + uri);
+      headers["cache-control"] = [
+        {
+          key: "Cache-Control",
+          value: "no-cache"
+          // value: "max-age=31536000,s-maxage=31536000"
+        }
+      ];
+    } else {
+      headers["cache-control"] = [
+        {
+          key: "Cache-Control",
+          value: "no-cache"
+        }
+      ];
+    }
 
     for (const name of RemoveHeaderList) {
       delete headers[name];
