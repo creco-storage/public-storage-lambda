@@ -4,6 +4,23 @@ async function main(request, response, { path }) {
   const extension = path.extname(url);
 
   if (extension && extension.length > 0) {
+    if (extension[0] === 'txt') {
+      const redirect = {
+        status: "302",
+        statusDescription: "Found",
+        headers: {
+          location: [
+            {
+              key: "Location",
+              value: `${url.replace('.txt', '')}/index.txt?${queryString}`,
+            },
+          ],
+        },
+      };
+      
+      return redirect;
+    }
+
     return request;
   }
 
