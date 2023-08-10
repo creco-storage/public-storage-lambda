@@ -42,13 +42,11 @@ async function main(request, response) {
       ];
     }
 
-    if (type === 'js') {
-      console.log("js " + uri);
+    if (type === 'js' && uri.includes('_next/static')) {
       headers["cache-control"] = [
         {
           key: "Cache-Control",
-          value: "no-cache"
-          // value: "max-age=31536000,s-maxage=31536000"
+          value: "max-age=31536000,s-maxage=31536000"
         }
       ];
     } else {
