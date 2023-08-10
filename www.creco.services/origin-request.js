@@ -1,9 +1,10 @@
 async function main(request, response, { path }) {
   const url = request.uri;
-  console.log('v1');
+  console.log('v2');
   console.log({ url });
 
   const extension = path.extname(url);
+  console.log('extension ' + extension);
 
   if (extension && extension.length > 0) {
     if (extension === 'txt') {
