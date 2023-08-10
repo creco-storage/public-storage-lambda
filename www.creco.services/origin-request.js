@@ -1,7 +1,10 @@
 async function main(request, response, { path }) {
   const [url, queryString] = request.uri?.split('?');
 
+  console.log({ url, queryString });
+
   const extension = path.extname(url);
+  console.log({ extension });
 
   if (extension && extension.length > 0) {
     if (extension[0] === 'txt') {
@@ -17,6 +20,7 @@ async function main(request, response, { path }) {
           ],
         },
       };
+      console.log(`redirect to ${`${url.replace('.txt', '')}/index.txt?${queryString}`}`);
       
       return redirect;
     }
@@ -26,6 +30,7 @@ async function main(request, response, { path }) {
 
   if (url.endsWith("/")) {
     request.uri = url + "index.html" + "?" + queryString;
+    console.log(`serving to ${request.uri}`);
     return request;
   }
 
@@ -41,6 +46,7 @@ async function main(request, response, { path }) {
       ],
     },
   };
+  console.log(`redirect to ${`${url}/?${queryString}`}`);
   
   return redirect;
 }
