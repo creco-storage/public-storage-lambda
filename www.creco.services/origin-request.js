@@ -13,7 +13,7 @@ async function main(request, response, { path }) {
             domainName: destDomain,
             port: 443,
             protocol: 'https',
-            path: '/github-api/api/health',
+            path: '/github-api' + url,
             sslProtocols: ['TLSv1', 'TLSv1.1', 'TLSv1.2'],
             readTimeout: 5,
             keepaliveTimeout: 5,
