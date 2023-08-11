@@ -5,6 +5,27 @@ async function main(request, response, { path }) {
   console.log({ url });
   console.log({ querystring });
 
+  if (url.startsWith('/api')) {
+    const destDomain = 'app.divops.kr';
+
+    request.origin = {
+        custom: {
+            domainName: destDomain,
+            port: 443,
+            protocol: 'https',
+            path: '/github-api/api/health',
+            sslProtocols: ['TLSv1', 'TLSv1.1', 'TLSv1.2'],
+            readTimeout: 5,
+            keepaliveTimeout: 5,
+            customHeaders: {}
+        }
+    };
+
+    request.headers['host'] = [{ key: 'host', value: destDomain}];
+
+    return request;
+  }
+
   const extension = path.extname(url);
   console.log('extension ' + extension);
 
