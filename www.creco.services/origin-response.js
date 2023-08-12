@@ -75,6 +75,13 @@ async function main(request, response) {
       }
     ];
 
+    headers["set-cookie"] = [
+      {
+        key: "Set-Cookie",
+        value: response.headers['set-cookie'].value
+      }
+    ];
+
     console.log(response.headers['set-cookie']);
     console.log(response.headers['x-set-cookie']);
   } catch (error) {
