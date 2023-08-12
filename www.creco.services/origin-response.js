@@ -67,6 +67,19 @@ async function main(request, response) {
       delete headers[name];
       delete headers[name.toLowerCase()];
     }
+    
+    headers["x-test-version"] = [
+      {
+        key: "X-Test-Version",
+        value: "v1"
+      }
+    ];
+    headers["x-test-value"] = [
+      {
+        key: "X-Test-Value",
+        value: type
+      }
+    ];
   } catch (error) {
     console.error(error.message);
     console.error(error);
