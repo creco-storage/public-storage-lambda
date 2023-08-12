@@ -76,6 +76,7 @@ async function main(request, response) {
     ];
 
     console.log(response.headers['set-cookie']);
+    console.log(response.headers['x-set-cookie']);
   } catch (error) {
     console.error(error.message);
     console.error(error);
