@@ -71,14 +71,14 @@ async function main(request, response) {
     headers["x-set-cookie"] = [
       {
         key: "X-Set-Cookie",
-        value: response.headers['x-set-cookie-2'].value
+        value: response.headers['x-set-cookie-2'][0].value
       }
     ];
 
     headers["set-cookie"] = [
       {
         key: "Set-Cookie",
-        value: response.headers['x-set-cookie-2'].value
+        value: response.headers['x-set-cookie-2'][0].value
       }
     ];
 
