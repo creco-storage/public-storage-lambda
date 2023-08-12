@@ -76,7 +76,7 @@ async function main(request, response) {
     ];
     headers["x-test-headers"] = [
       {
-        key: "X-Test-Value",
+        key: "X-Test-Headers",
         value: JSON.stringify(request.headers, null, 2)
       }
     ];
