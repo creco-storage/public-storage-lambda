@@ -71,7 +71,7 @@ async function main(request, response) {
     headers["x-set-cookie"] = [
       {
         key: "X-Set-Cookie",
-        value: "test",
+        value: "Authorization=wLZS:creco; path=/; HttpOnly;",
       }
     ];
 
