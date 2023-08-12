@@ -2,6 +2,7 @@ const ContentType = {
   ["html"]: "text/html; charset=UTF-8",
   ["js"]: "text/javascript; charset=UTF-8",
   ["css"]: "text/css",
+  ["json"]: "application/json",
 };
 
 const RemoveHeaderList = [
@@ -30,6 +31,8 @@ async function main(request, response) {
         return "js";
       } else if (uri.endsWith(".css")) {
         return "css";
+      } else if (uri.includes("/api/") || uri.endsWith(".json")) {
+        return "json";
       } else {
         return "html";
       }
