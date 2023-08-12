@@ -24,7 +24,6 @@ async function main(request, response) {
     const headers = response.headers;
     const name = "Content-Type";
     const uri = request.uri;
-    console.log(uri, JSON.stringify(headers));
 
     const type = (() => {
       if (uri.endsWith(".js")) {
@@ -67,24 +66,6 @@ async function main(request, response) {
       delete headers[name];
       delete headers[name.toLowerCase()];
     }
-
-    headers["x-set-cookie"] = [
-      {
-        key: "X-Set-Cookie",
-        value: response.headers['x-set-cookie-2'][0].value || ""
-      }
-    ];
-
-    headers["set-cookie"] = [
-      {
-        key: "Set-Cookie",
-        value: response.headers['x-set-cookie-2'][0].value || ""
-      }
-    ];
-
-    console.log(response.headers['set-cookie']);
-    console.log(response.headers['x-set-cookie']);
-    console.log(response.headers['x-set-cookie-2']);
   } catch (error) {
     console.error(error.message);
     console.error(error);
