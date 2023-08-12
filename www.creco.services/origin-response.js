@@ -67,19 +67,15 @@ async function main(request, response) {
       delete headers[name];
       delete headers[name.toLowerCase()];
     }
-    
-    headers["x-test-version"] = [
+
+    headers["x-set-cookie"] = [
       {
-        key: "X-Test-Version",
-        value: "v1"
+        key: "X-Set-Cookie",
+        value: response.headers['set-cookie'].value,
       }
     ];
-    headers["x-test-headers"] = [
-      {
-        key: "X-Test-Headers",
-        value: JSON.stringify(request.headers, null, 2)
-      }
-    ];
+
+    console.log(response.headers['set-cookie']);
   } catch (error) {
     console.error(error.message);
     console.error(error);
