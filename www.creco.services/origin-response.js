@@ -71,19 +71,20 @@ async function main(request, response) {
     headers["x-set-cookie"] = [
       {
         key: "X-Set-Cookie",
-        value: response.headers['set-cookie'].value
+        value: response.headers['x-set-cookie-2'].value
       }
     ];
 
     headers["set-cookie"] = [
       {
         key: "Set-Cookie",
-        value: response.headers['set-cookie'].value
+        value: response.headers['x-set-cookie-2'].value
       }
     ];
 
     console.log(response.headers['set-cookie']);
     console.log(response.headers['x-set-cookie']);
+    console.log(response.headers['x-set-cookie-2']);
   } catch (error) {
     console.error(error.message);
     console.error(error);
