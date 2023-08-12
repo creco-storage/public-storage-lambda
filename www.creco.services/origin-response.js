@@ -23,6 +23,8 @@ async function main(request, response) {
     const headers = response.headers;
     const name = "Content-Type";
     const uri = request.uri;
+    console.log(uri, JSON.stringify(headers));
+
     const type = (() => {
       if (uri.endsWith(".js")) {
         return "js";
