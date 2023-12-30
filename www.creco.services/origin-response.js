@@ -21,7 +21,7 @@ const RemoveHeaderList = [
 
 async function main(request, response) {
   try {
-    console.log(`status: ${response.status});
+    console.log(`status: ${response.status}`);
     if (response.status === '404') {
       console.log(JSON.stringify(response, null, 2));
       response.status = '302';
