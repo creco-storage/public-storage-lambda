@@ -32,7 +32,7 @@ async function main(request, response) {
           value: `https://docs.aws.amazon.com/lambda/latest/dg/lambda-edge.html?uri=${request.uri}`
         }
       ];
-/post/test-ajlskdjasldj/index.html
+
       return response;
     }
     const headers = response.headers;
