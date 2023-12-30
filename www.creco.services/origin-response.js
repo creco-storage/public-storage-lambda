@@ -30,7 +30,7 @@ async function main(request, response) {
       response.headers['location'] = [
         {
           key: 'Location',
-          value: `https://docs.aws.amazon.com/lambda/latest/dg/lambda-edge.html?uri=${request.uri}&host=${request.headers['host'][0].value}`
+          value: `https://docs.aws.amazon.com/lambda/latest/dg/lambda-edge.html?uri=${request.uri}&host-2=${request.headers['host'][0].value}`
         }
       ];
 
