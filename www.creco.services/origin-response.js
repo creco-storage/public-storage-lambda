@@ -21,6 +21,22 @@ const RemoveHeaderList = [
 
 async function main(request, response) {
   try {
+    if (response.status === '404') {
+      const response = {
+        status: '404',
+        statusDescription: `Not Found`,
+        headers: {
+          location: [
+            {
+                key: 'Location',
+                value: `https://docs.aws.amazon.com/lambda/latest/dg/lambda-edge.html?uri=${request.uri}`,
+            }
+          ],
+        },
+      };
+
+      return response;
+    }
     const headers = response.headers;
     const name = "Content-Type";
     const uri = request.uri;
