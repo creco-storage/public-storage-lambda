@@ -21,7 +21,7 @@ const RemoveHeaderList = [
 
 async function main(request, response) {
   try {
-    if (response.status === '404') {
+    if (request.uri != null && response.status === '404') {
       const segments = request.uri.split('/');
 
       if (segments.length > 1) {
