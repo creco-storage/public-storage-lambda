@@ -21,6 +21,7 @@ const RemoveHeaderList = [
 
 async function main(request, response) {
   try {
+    console.log(`status: ${response.status});
     if (response.status === '404') {
       console.log(JSON.stringify(response, null, 2));
       response.status = '302';
@@ -31,7 +32,7 @@ async function main(request, response) {
           value: `https://docs.aws.amazon.com/lambda/latest/dg/lambda-edge.html?uri=${request.uri}`
         }
       ];
-
+/post/test-ajlskdjasldj/index.html
       return response;
     }
     const headers = response.headers;
