@@ -21,21 +21,14 @@ const RemoveHeaderList = [
 
 async function main(request, response) {
   try {
-    console.log(`status: ${response.status}`);
-    console.log(`host-2: ${request.headers['host'][0].value}`);
     if (response.status === '404') {
-      console.log(JSON.stringify(request, null, 2));
-      response.status = '302';
-      response.statusDescription = 'NotFound';
-      response.headers['location'] = [
-        {
-          key: 'Location',
-          value: `https://docs.aws.amazon.com/lambda/latest/dg/lambda-edge.html?uri=${request.uri}&host-2=${request.headers['host'][0].value}`
-        }
-      ];
+      const segments = response.uri.split('/');
 
-      return response;
+      if (segments.length > 1) {
+        response.uri = '/' + segments[1] + '/404.html';
+      }
     }
+
     const headers = response.headers;
     const name = "Content-Type";
     const uri = request.uri;
