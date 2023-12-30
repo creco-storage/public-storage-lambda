@@ -25,7 +25,7 @@ async function main(request, response) {
       const segments = request.uri.split('/');
 
       if (segments.length > 1) {
-        request.uri = '/' + segments[1] + '/404.html';
+        request.uri = '/' + segments[1] + '/404/index.html';
       }
     }
 
