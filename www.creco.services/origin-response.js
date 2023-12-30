@@ -22,6 +22,8 @@ const RemoveHeaderList = [
 async function main(request, response) {
   try {
     if (response.status === '404') {
+      console.log(JSON.stringify(response, null, 2));
+      response.status = '302';
       response.statusDescription = 'NotFound';
       response.headers['location'] = [
         {
