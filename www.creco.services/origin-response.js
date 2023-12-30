@@ -22,18 +22,21 @@ const RemoveHeaderList = [
 async function main(request, response) {
   try {
     if (request.uri != null && response.status === '404') {
+      const originDomain = request.origin?.custom?.domainName;
+      const originPath = request.origin?.custom?.path;
       const segments = request.uri.split('/');
 
-      if (segments.length > 1) {
-        request.uri = '/' + segments[1] + '/404/index.html';
+      if (originDomain != null && originPath != null && segments.length > 1) {
+        const url = `https://${originDomain}${originPath}/${segments[1]}/404/index.html`;
+        const raw404 = await fetch(`https://raw.githubusercontent.com/creco-storage/public-storage/main/blog.creco.dev/`).then(x => x.text());
+
+        response.body = raw404;
       }
     }
 
     const headers = response.headers;
     const name = "Content-Type";
     const uri = request.uri;
-
-    console.log(`REQUEST_URI: ${uri}`);
 
     const type = (() => {
       if (uri.endsWith(".js")) {
