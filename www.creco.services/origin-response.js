@@ -27,7 +27,7 @@ async function main(request, response) {
       const segments = request.uri.split('/');
 
       if (originDomain != null && originPath != null && segments.length > 1) {
-        console.log({ originDomain, originPath, segements_1: segements[1] });
+        console.log({ originDomain, originPath, segments_1: segments[1] });
         const url = `https://${originDomain}${originPath}/${segments[1]}/404/index.html`;
         const raw404 = await fetch(`https://raw.githubusercontent.com/creco-storage/public-storage/main/blog.creco.dev/`).then(x => x.text());
 
