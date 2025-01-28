@@ -1,8 +1,9 @@
-const ContentType = {
+const CONTENT_TYPE = {
   ["html"]: "text/html; charset=UTF-8",
   ["js"]: "text/javascript; charset=UTF-8",
   ["css"]: "text/css",
   ["json"]: "application/json",
+  ["svg"]: "image/svg+xml",
 };
 
 const RemoveHeaderList = [
@@ -47,6 +48,8 @@ async function main(request, response) {
         return "css";
       } else if (uri.includes("/api/") || uri.endsWith(".json")) {
         return "json";
+      } else if (uri.endsWith(".svg")) {
+        return "svg";
       } else {
         return "html";
       }
@@ -56,7 +59,7 @@ async function main(request, response) {
       headers[name.toLowerCase()] = [
         {
           key: name,
-          value: ContentType[type],
+          value: CONTENT_TYPE[type],
         },
       ];
     }
