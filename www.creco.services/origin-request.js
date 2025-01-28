@@ -1,7 +1,7 @@
 async function main(request, response, { path }) {
   const url = request.uri;
   const querystring = request.querystring;
-  const hostname = request.headers?.['host']?.[0].value;
+  const hostname = request.headers?.['host']?.[0]?.value;
   console.log('v5');
   console.log({ url });
   console.log({ querystring });
