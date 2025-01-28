@@ -1,11 +1,12 @@
 async function main(request, response, { path }) {
   const url = request.uri;
   const querystring = request.querystring;
-  const hostname = request.headers?.['host']?.[0]?.value;
+  const domainName = request.origin?.custom?.domainName;
+                
   console.log('v5');
   console.log({ url });
   console.log({ querystring });
-  console.log({ hostname });
+  console.log({ domainName });
 
   if (url.startsWith('/api')) {
     const destDomain = 'app.divops.kr';
