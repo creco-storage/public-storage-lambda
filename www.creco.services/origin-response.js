@@ -51,6 +51,8 @@ async function main(request, response) {
         return "json";
       } else if (uri.endsWith(".svg")) {
         return "svg";
+      } else if (uri.endsWith(".xml")) {
+        return "xml";
       } else {
         return "html";
       }
