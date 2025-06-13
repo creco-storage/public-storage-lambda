@@ -4,6 +4,7 @@ const CONTENT_TYPE = {
   ["css"]: "text/css",
   ["json"]: "application/json",
   ["svg"]: "image/svg+xml",
+  ["xml"]: "application/xml; charset=UTF-8",
 };
 
 const RemoveHeaderList = [
