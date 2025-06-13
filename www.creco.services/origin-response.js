@@ -5,6 +5,7 @@ const CONTENT_TYPE = {
   ["json"]: "application/json",
   ["svg"]: "image/svg+xml",
   ["xml"]: "application/xml; charset=UTF-8",
+  ["txt"]: "text/plain; charset=UTF-8",
 };
 
 const RemoveHeaderList = [
@@ -53,6 +54,8 @@ async function main(request, response) {
         return "svg";
       } else if (uri.endsWith(".xml")) {
         return "xml";
+      } else if (uri.endsWith(".txt")) {
+        return "txt";
       } else {
         return "html";
       }
